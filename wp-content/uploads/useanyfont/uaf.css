@@ -1,0 +1,10 @@
+				@font-face {
+					font-family: 'spirits';
+					src: url('/wp-content/uploads/useanyfont/6139Spirits.woff2') format('woff2'),
+						url('/wp-content/uploads/useanyfont/6139Spirits.woff') format('woff');
+					  font-display: auto;
+				}
+
+				.spirits{font-family: 'spirits' !important;}
+
+		
