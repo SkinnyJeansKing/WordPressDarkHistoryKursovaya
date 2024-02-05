@@ -61,10 +61,10 @@ class Admin_Notices {
 
 		self::$notices = array(
 			'pa-review',
-			'bf23_notice',
+			'buttons_hovers',
 		);
 
-		delete_option( 'shape_divider' );
+		delete_option( 'textual_showcase' );
 
 	}
 
@@ -106,7 +106,7 @@ class Admin_Notices {
 			return;
 		}
 
-		$this->get_bf_notice();
+		$this->get_buttons_hover_notice();
 
 	}
 
@@ -235,52 +235,36 @@ class Admin_Notices {
 
 	/**
 	 *
-	 * Shows admin notice for Black Friday Sale.
+	 * Shows admin notice for Textual Showcase.
 	 *
-	 * @since 4.10.15
+	 * @since 4.10.16
 	 * @access public
 	 *
 	 * @return void
 	 */
-	public function get_bf_notice() {
+	public function get_buttons_hover_notice() {
 
-		$papro_path = 'premium-addons-pro/premium-addons-pro-for-elementor.php';
+		$buttons_notice = get_option( 'buttons_hovers' );
 
-		$is_papro_installed = Helper_Functions::is_plugin_installed( $papro_path );
-
-		$license_key = get_option( 'papro_license_key' );
-
-		$bf_notice = get_option( 'bf23_notice' );
-
-		if ( '1' === $bf_notice ) {
+		if ( '1' === $buttons_notice ) {
 			return;
 		}
 
-        if ( $is_papro_installed ) {
-			$status = $this->check_status( $license_key );
-
-            if( $status ) {
-                return;
-            }
-		}
-
-		$link = Helper_Functions::get_campaign_link( 'https://premiumaddons.com/black-friday/', 'wp-dash', 'bf23-notification', 'bf23' );
+		$buttons = Helper_Functions::get_campaign_link( 'https://premiumaddons.com/button-widget-for-elementor-page-builder/', 'buttons-hover-notification', 'wp-dash', 'buttons-hover' );
 
 		?>
 
-		<div class="error pa-notice-wrap pa-new-feature-notice pa-review-notice">
+		<div class="error pa-notice-wrap pa-new-feature-notice">
 			<div class="pa-img-wrap">
 				<img src="<?php echo PREMIUM_ADDONS_URL . 'admin/images/pa-logo-symbol.png'; ?>">
 			</div>
 			<div class="pa-text-wrap">
 				<p>
-					<?php echo __( 'Black Friday! Get <b>25% Discount</b> for a Limited Time Only on New Purchases, Upgrades and Renewals.', 'premium-addons-for-elementor' ); ?>
-					<a class="button button-primary" href="<?php echo esc_url( $link ); ?>" target="_blank">
-						<span><?php echo __( 'Catch The Deal', 'premium-addons-for-elementor' ); ?></span>
-					</a>
+					<strong><?php echo __( 'New Hover Effects', 'premium-addons-for-elemetor' ); ?></strong>
+					<?php echo sprintf( __( 'added to all the buttons all over the plugin. <a href="%s" target="_blank">Check it out now!</a>', 'premium-addons-for-elementor' ), $buttons ); ?>
 				</p>
 			</div>
-			<div class="pa-notice-close" data-notice="bf23">
+			<div class="pa-notice-close" data-notice="buttons">
 				<span class="dashicons dashicons-dismiss"></span>
 			</div>
 		</div>

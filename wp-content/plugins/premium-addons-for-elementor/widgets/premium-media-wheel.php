@@ -1165,6 +1165,22 @@ class Premium_Media_Wheel extends Widget_Base {
 			)
 		);
 
+        $this->add_control(
+			'render_event',
+			array(
+				'label'              => __( 'Trigger Animation On', 'premium-addons-for-elementor' ),
+				'type'               => Controls_Manager::SELECT,
+				'options'            => array(
+					'scroll' => __( 'Scroll', 'premium-addons-for-elementor' ),
+					'load'   => __( 'Page Load', 'premium-addons-for-elementor' ),
+				),
+				'default'            => 'scroll',
+				'condition' => array(
+					'media_wheel_animation'       => 'infinite',
+				),
+			)
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -2419,6 +2435,7 @@ class Premium_Media_Wheel extends Widget_Base {
 		if ( 'infinite' === $type ) {
 			$wheel_settings['dir']     = $direction;
 			$wheel_settings['reverse'] = $settings['media_wheel_reverse'];
+            $wheel_settings['renderEvent'] = $settings['render_event'];
 		} else {
 			$wheel_settings['loop'] = $settings['media_wheel_loop'];
 			$auto_play              = 'yes' === $settings['media_wheel_autoplay'];
@@ -2566,6 +2583,8 @@ class Premium_Media_Wheel extends Widget_Base {
 		foreach ( $items as $index => $item ) {
 
 			$media_type = $item['pa_media_type'];
+			
+			if($item['media_wheel_img']) {
 
 			$image_id = apply_filters( 'wpml_object_id', $item['media_wheel_img']['id'], 'elementor_library', true );
 
@@ -2576,6 +2595,7 @@ class Premium_Media_Wheel extends Widget_Base {
 			if ( isset( $image_by_id->post_title ) ) {
 				$alt = apply_filters( 'pa_media_alt', get_post( $image_id )->post_title );
 			}
+		}
 
 			if ( 'template' === $media_type ) {
 				$hover_effect = '';

@@ -2513,7 +2513,7 @@ class Premium_Grid extends Widget_Base {
 		}
 
 		$cat_filtered = str_replace( ', ', ',', $cat_filtered );
-		$cat_filtered = preg_replace( '/[\s_`\'‘&@!#%]/', '-', $cat_filtered );
+		$cat_filtered = preg_replace( '/[\s_`\'&@!#%]/', '-', $cat_filtered );
 		$cat_filtered = str_replace( ',', ' ', $cat_filtered );
 
 		return $cat_filtered;
@@ -2759,8 +2759,8 @@ class Premium_Grid extends Widget_Base {
 
 				$image_id = apply_filters( 'wpml_object_id', $image['premium_gallery_img']['id'], 'elementor_library', true );
 
-                //Check for Image ID, but not for the default Elementor placeholder.
-                if( false === strpos( $image['premium_gallery_img']['url'], 'placeholder.png' ) && ! $image['premium_gallery_video'] && ! $image_id )
+                //Check for Image ID, but not for the default Elementor placeholder.                
+                if( false === strpos( $image['premium_gallery_img']['url'], 'placeholder.png' ) && ! $image['premium_gallery_video'] && ! $image_id && empty( $image['premium_gallery_img']['url'] ) )
                     continue;
 
 				$image_by_id = get_post( $image_id );
